@@ -35,6 +35,14 @@
                     </form>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <br>
+                    <br>
+                    <br>
+                    <a href="https://drive.google.com/uc?id=1VpaSLY2REg2aZHISvpHQUJligWunGmUm&export=download" download="best">Download</a>
+                </div>
+            </div>
         </div>
        
     </body>

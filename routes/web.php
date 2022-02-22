@@ -19,10 +19,13 @@ Route::get('/', function () {
 
 	//GET ALL FILES
 	//$files = Storage::disk("google")->allFiles();  //allFiles || files
-
+	//dd($files);
+	// $path =  Storage::disk("google")->path($files); 
+	// dd($path);
 	// GET THE FIRST FILE
-	// $firstFileName = $files[0];
-	// dump("FIRST NAME:". $firstFileName);
+	 // $firstFileName = $files[0];
+	 // $get = Storage::disk("google")->url($firstFileName);
+	 //  dump("FIRST NAME:". $get);
 
 	// GET THE FIRST FILE DETAILS
 	// $details = Storage::disk('google')->getMetadata($firstFileName);
@@ -44,20 +47,48 @@ Route::get('/', function () {
 
 
 	// DOWNLOAD FILE
-	// $getFiles = Storage::disk("google")->files();
-	// $getFirstFileName = $getFiles[1];
-	//  $response = Storage::disk("google")->download($getFirstFileName, "my_file");
+	//$getFiles = Storage::disk("google")->files();
+	// $getFirstFileName = '1KGLJMvFH3zu30k_xOymCPj8ksMNIdVYN';
+	//  $response = Storage::disk("google")->download($getFirstFileName, "teacher");
 	//  return $response;
-	// dd($getFirstFileName);
+	//dd($getFirstFileName);
 	
     return view('welcome');
 });
 
+
+
+Route::get('/home', function () {
+
+	
+	
+    return view('home');
+});
+
+
 Route::post('/upload', function (Request $request) {
 
-	Storage::disk("google")->putFileAs("",$request->file("thing"), "");
-	// Storage::disk("google")->putFileAs("folder_to_save",$request->file("thing"), "name_the_file");
-   // dd($request->file("thing")->store("","google"));
+	// $folder = Storage::disk("google")->putFileAs("folder_to_save",$request->file("thing"), "name_the_file.webp");
+	
+	 // $path = $request->file("thing")->store("","google");
+	// $url = $disk->getId($path);
+
+
+	$disk = Storage::disk('google');
+	$path = $request->file("thing")->store("","google");
+	$url = $disk->url($path);
+	return $url;
+	
 	// dd(openssl_get_cert_locations()); 
-})->name("upload");
+});
+
+
+Route::get('/download', function (Request $request) {
+
+	
+	$disk = Storage::disk('google');
+	 $url = $disk->download('https://drive.google.com/uc?id=1VpaSLY2REg2aZHISvpHQUJligWunGmUm&export=media',"");
+	return $url;
+	
+});
 
